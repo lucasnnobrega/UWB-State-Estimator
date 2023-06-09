@@ -1,0 +1,259 @@
+location: .gitman
+sources:
+  - repo: git@github.com:horynjir007/tii_demo
+    name: tii_demo
+    rev: feat_uvdar_uwb
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/uvdar_core.git
+    name: uvdar_core
+    rev: b6105bd14e197e9cb025786fb80f46cf65bb837d
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@mrs.felk.cvut.cz:visual-localization/vio_core.git
+    name: vio_core
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_serial.git
+    name: mrs_serial
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/uvdar_gazebo_plugin.git
+    name: uvdar_gazebo_plugin
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/bluefox2.git
+    name: bluefox2
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/nimbro_network.git
+    name: nimbro_network
+    rev: develop
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/camera_base.git
+    name: camera_base
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/mrs_msgs.git
+    name: mrs_msgs
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_lib.git
+    name: mrs_lib
+    rev: master
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:horynjir007/mrse.git
+    name: mrse
+    rev: feat_uwb_implementation
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/Object-tracker-ROS.git
+    name: object_tracker
+    rev: multiple_uav
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/UWB_MRS_ranging_ros_node.git
+    name: uwb
+    rev: multiple_uav
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+sources_locked:
+  - repo: git@github.com:ctu-mrs/uvdar_core.git
+    name: uvdar_core
+    rev: f937679ea2a9b77eacf37a973a1dd8f51d56041d
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@mrs.felk.cvut.cz:visual-localization/vio_core.git
+    name: vio_core
+    rev: 71684480603d8f652ee547f7929861aefdca687c
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_serial.git
+    name: mrs_serial
+    rev: 8e234320d82f996eb3c1268cc5c232ae1eabdf75
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/uvdar_gazebo_plugin.git
+    name: uvdar_gazebo_plugin
+    rev: b52c37b01bcc9ea8956dcc1ee505cdefebdadeb1
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/bluefox2.git
+    name: bluefox2
+    rev: d38bc39762a125310d0f39584598f4fd2292e986
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/nimbro_network.git
+    name: nimbro_network
+    rev: 5068b6413372c309542a95ad522642d9406fa66f
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/camera_base.git
+    name: camera_base
+    rev: 444ca6fa8b4f00241af9983a96be7e36dee2c039
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/mrs_msgs.git
+    name: mrs_msgs
+    rev: 9bab0e6d96da900baadab6686918245e7ca7e7ee
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_lib.git
+    name: mrs_lib
+    rev: dcc494ea1c80fafa51bbc24e80c8f12f6f8b0eed
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:horynjir007/mrse.git
+    name: mrse
+    rev: ef7c01edbcc428c5451324e4fda6403f274bd779
+    type: git
+    params:
+    sparse_paths:
+      -
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+groups:
+  -
+default_group: ''

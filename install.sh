@@ -46,13 +46,13 @@ while true; do
   fi
 done
 
-default=n
+default=y
 while true; do
   if [[ "$unattended" == "1" ]]
   then
     resp=$default
   else
-    [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mInstall agnostic version? [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+    [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mInstall agnostic version? (mrs_msgs and mrs_lib) [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
   fi
   response=`echo $resp | sed -r 's/(.*)$/\1=/'`
 
@@ -83,6 +83,30 @@ while true; do
   then
 
     ./.gitman/bluefox2/install/install.sh
+
+    break
+  elif [[ $response =~ ^(n|N)=$ ]]
+  then
+    break
+  else
+    echo " What? \"$resp\" is not a correct answer. Try y+Enter."
+  fi
+done
+
+default=y
+while true; do
+  if [[ "$unattended" == "1" ]]
+  then
+    resp=$default
+  else
+    [[ -t 0 ]] && { read -t 5 -n 2 -p $'\e[1;32mInstall uvdar libs? [y/n] (default: '"$default"$')\e[0m\n' resp || resp=$default ; }
+  fi
+  response=`echo $resp | sed -r 's/(.*)$/\1=/'`
+
+  if [[ $response =~ ^(y|Y)=$ ]]
+  then
+
+    ./.gitman/uvdar_core/install/install.sh
 
     break
   elif [[ $response =~ ^(n|N)=$ ]]

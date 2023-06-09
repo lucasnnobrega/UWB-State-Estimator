@@ -1,0 +1,260 @@
+location: .gitman
+sources:
+  - repo: git@github.com:horynjir007/tii_demo
+    name: tii_demo
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/localization/tii_demo
+    links:
+      -
+    scripts:
+      - git submodule update #--init --recursive
+  - repo: git@github.com:ctu-mrs/uvdar_core.git
+    name: uvdar_core
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/localization/uvdar_core
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@mrs.felk.cvut.cz:visual-localization/vio_core.git
+    name: vio_core
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/localization/vio_core
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_serial.git
+    name: mrs_serial
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/mrs_serial
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/uvdar_gazebo_plugin.git
+    name: uvdar_gazebo_plugin
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/sw_dependencies/uvdar_gazebo_plugin
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/bluefox2.git
+    name: bluefox2
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/bluefox2
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/nimbro_network.git
+    name: nimbro_network
+    rev: develop
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/nimbro_network
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/camera_base.git
+    name: camera_base
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/camera_base
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/mrs_msgs.git
+    name: mrs_msgs
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/lib_and_msgs/mrs_msgs
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_lib.git
+    name: mrs_lib
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/lib_and_msgs/mrs_lib
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:horynjir007/mrse.git
+    name: mrse
+    rev: feat_uwb_implementation
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/core/mrse
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  ###########################################################
+  - repo: git@github.com:vitpetrik/Object-tracker-ROS.git
+    name: object_tracker
+    rev: multiple_uav
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/UWB_project/object_tracker
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/UWB_MRS_ranging_ros_node.git
+    name: uwb
+    rev: multiple_uav
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/UWB_project/uwb
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+sources_locked:
+  - repo: git@github.com:ctu-mrs/uvdar_core.git
+    name: uvdar_core
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/localization/uvdar_core
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@mrs.felk.cvut.cz:visual-localization/vio_core.git
+    name: vio_core
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/localization/vio_core
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_serial.git
+    name: mrs_serial
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/mrs_serial
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/uvdar_gazebo_plugin.git
+    name: uvdar_gazebo_plugin
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/sw_dependencies/uvdar_gazebo_plugin
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/bluefox2.git
+    name: bluefox2
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/bluefox2
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/nimbro_network.git
+    name: nimbro_network
+    rev: develop
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/nimbro_network
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/camera_base.git
+    name: camera_base
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/hw_dependencies/camera_base
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:vitpetrik/mrs_msgs.git
+    name: mrs_msgs
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/lib_and_msgs/mrs_msgs
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:ctu-mrs/mrs_lib.git
+    name: mrs_lib
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/lib_and_msgs/mrs_lib
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+  - repo: git@github.com:horynjir007/mrse.git
+    name: mrse
+    rev: master
+    type: git
+    sparse_paths:
+      -
+    link: ros_packages/core/mrse
+    links:
+      -
+    scripts:
+      - git submodule update --init --recursive
+groups:
+  -
+default_group: ''

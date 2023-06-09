@@ -1,0 +1,16 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/lucasnn/UWB-workspace-clean/devel/lib/python3/dist-packages",
+        "/home/lucasnn/test_jiri_workspace/devel/lib/python3/dist-packages",
+        "/home/lucasnn/workspace/devel/lib/python3/dist-packages",
+        "/home/lucasnn/mrs_workspace/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/lucasnn/UWB-workspace-clean/devel/lib/python3/dist-packages",
+        "/home/lucasnn/test_jiri_workspace/devel/lib/python3/dist-packages",
+        "/home/lucasnn/workspace/devel/lib/python3/dist-packages",
+        "/home/lucasnn/mrs_workspace/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ]
+}
