@@ -1,0 +1,16 @@
+trajectory:
+  offset: [0.0, 0.0, 0.0, 0.0]      # [x, y, z, heading]
+
+  # If 'dynamic_uav_name' is true, the 'uavs' parameter is ignored and trajectory is loaded
+  # to the UAV, specified by the 'uav_name' parameter from the 'trajectory/filename' parameter.
+  # This allows for UAV name-agnostic trajectory loading (it doesn't need to be specified in
+  # the yaml and can be loaded eg. from an environment variable.
+  dynamic_uav_name: false
+  # Options specified here will override the common options above.
+  uavs:
+    uav38:
+      filename: "~/git/UWB-workspace/experiments/line.txt"
+    uav39:
+      filename: "~/git/UWB-workspace/experiments/line.txt"
+    uav40:
+      filename: "~/git/UWB-workspace/experiments/line.txt"

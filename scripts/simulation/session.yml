@@ -1,0 +1,116 @@
+name: simulation
+root: ./
+startup_window: uv_observer 
+pre_window: export RUN_TYPE=simulation; export UAV_TYPE=x500; export WORLD_NAME=simulation; export ODOMETRY_TYPE=gps; export SENSORS="garmin_down"
+windows:
+  - roscore:
+      layout: even-vertical
+      panes:
+        - roscore
+  - gazebo:
+      layout: even-vertical
+      panes:
+        - waitForRos; roslaunch uvdar_core uvdar_gazebo.launch gui:=true
+  - status:
+      layout: even-horizontal
+      panes:
+        - export UAV_NAME=uav1; waitForRos; roslaunch mrs_uav_status status.launch
+        - export UAV_NAME=uav2; waitForRos; roslaunch mrs_uav_status status.launch
+        - export UAV_NAME=uav3; waitForRos; roslaunch mrs_uav_status status.launch
+  - spawn:
+      layout: even-vertical
+      panes:
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn  "1 $UAV_TYPE --pos-file `pwd`/position.csv --enable-rangefinder --enable-ground-truth --enable-dual-uv-cameras --enable-back-uv-camera --uvcam_calib_file \"$(rospack find uvdar_core)/include/OCamCalib/config/calib_results_bf_uv_fe.txt\""
+        - waitForSimulation; sleep 12; rosservice call /mrs_drone_spawner/spawn  "2 $UAV_TYPE --pos-file `pwd`/position.csv --enable-rangefinder --enable-ground-truth --enable-uv-leds --uvled_s 4 5 6 7"
+        - waitForSimulation; rosservice call /mrs_drone_spawner/spawn  "3 $UAV_TYPE --pos-file `pwd`/position.csv --enable-rangefinder --enable-ground-truth --enable-dual-uv-cameras --enable-back-uv-camera --uvcam_calib_file \"$(rospack find uvdar_core)/include/OCamCalib/config/calib_results_bf_uv_fe.txt\""
+  - sq_setter:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav2; waitForOdometry; roslaunch uvdar_core led_manager.launch
+        - 'history -s rosservice call /uav2/uvdar_led_manager_node/quick_start 5'
+        - 'history -s rosservice call /uav2/uvdar_led_manager_node/set_frequency 59'
+  - control:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForOdometry; roslaunch mrs_uav_general core.launch config_mpc_tracker:=$(rospack find uvdar_core)/scripts/custom_configs/mpc_tracker.yaml
+        - export UAV_NAME=uav2; waitForOdometry; roslaunch mrs_uav_general core.launch config_mpc_tracker:=$(rospack find uvdar_core)/scripts/custom_configs/mpc_tracker.yaml
+        - export UAV_NAME=uav3; waitForOdometry; roslaunch mrs_uav_general core.launch config_mpc_tracker:=$(rospack find uvdar_core)/scripts/custom_configs/mpc_tracker.yaml
+  - autostart:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForSimulation; roslaunch mrs_uav_general automatic_start.launch
+        - export UAV_NAME=uav2; waitForSimulation; roslaunch mrs_uav_general automatic_start.launch
+        - export UAV_NAME=uav3; waitForSimulation; roslaunch mrs_uav_general automatic_start.launch
+  - takeoff:
+      layout: even-vertical
+      panes:
+        - 'export UAV_NAME=uav1;
+          waitForControl;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard'
+        - 'export UAV_NAME=uav2;
+          waitForControl;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard'
+        - 'export UAV_NAME=uav3;
+          waitForControl;
+          rosservice call /$UAV_NAME/mavros/cmd/arming 1;
+          rosservice call /$UAV_NAME/mavros/set_mode 0 offboard'
+        # #}
+  - rviz:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForControl; roslaunch uvdar_core multimodal_hypothesis_rviz.launch
+  - uv_observer:
+      layout: even-vertical
+      panes:
+        - waitForCompile; gz world --pause=0; sleep 12;  export UAV_NAME=uav1; waitForControl; roslaunch uvdar_core sim_three_sided.launch
+        - waitForCompile; gz world --pause=0; sleep 12;  export UAV_NAME=uav3; waitForControl; roslaunch uvdar_core sim_three_sided.launch
+        # - waitForCompile; gz world --pause=0; sleep 6;  export UAV_NAME=uav1; waitForControl; roslaunch uvdar_core multi_frequency_test.launch
+  - kalman_filter:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForControl; roslaunch uvdar_core uvdar_kalman.launch output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav3; waitForControl; roslaunch uvdar_core uvdar_kalman.launch output_frame:=$UAV_NAME/stable_origin
+  - object_tracker:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForControl; roslaunch object_tracker tracker.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav3; waitForControl; roslaunch object_tracker tracker.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+  - uwb_range:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForControl; roslaunch uwb_range_fake uwb.launch output_id:=0 target_uav:=uav2
+        - export UAV_NAME=uav3; waitForControl; roslaunch uwb_range_fake uwb.launch output_id:=0 target_uav:=uav2
+  - Follower:
+      layout: even-verical
+      panes:
+        - export UAV_NAME=uav1; waitForControl; roslaunch leader_follower follower.launch angle:=150 distance:=6 leader_id:=0
+        - export UAV_NAME=uav3; waitForControl; roslaunch leader_follower follower.launch angle:=210 distance:=6 leader_id:=0
+  - Follower-enable:
+      layout: even-verical
+      panes:
+        - 'history -s rosservice call /uav1/leader_follower/start_following'
+        - 'history -s rosservice call /uav3/leader_follower/start_following'
+  - set-constraint:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav1; waitForControl; rosservice call /$UAV_NAME/constraint_manager/set_constraints slow
+        - export UAV_NAME=uav2; waitForControl; rosservice call /$UAV_NAME/constraint_manager/set_constraints slow
+        - export UAV_NAME=uav3; waitForControl; rosservice call /$UAV_NAME/constraint_manager/set_constraints slow
+  - trajectory:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav2; waitForControl; roslaunch trajectory_loader single_uav.launch path:=/home/mrs/UWB-workspace/experiments file:=circle.txt
+        - 'export UAV_NAME=uav2; history -s rosservice call /$UAV_NAME/control_manager/goto_trajectory_start'
+        - 'export UAV_NAME=uav2; history -s rosservice call /$UAV_NAME/control_manager/start_trajectory_tracking'
+  - slow_down:
+      layout: even-vertical
+      panes:
+        - waitForSimulation; waitForControl; sleep 5; gz physics -u 120
+  - goto:
+      layout: even-vertical
+      panes:
+        - 'history -s rosservice call /uav1/control_manager/goto \"goal: \[5.0, -8.0, 5.0, 1.57\]\"'
+        - 'history -s rosservice call /uav2/control_manager/goto \"goal: \[10.0, 0.0, 5.0, 1.57\]\"'
+        - 'history -s rosservice call /uav3/control_manager/goto \"goal: \[15.0, -8.0, 5.0, 1.57\]\"'

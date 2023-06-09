@@ -1,0 +1,103 @@
+name: sim_multiple_uwb
+root: ./
+startup_window: uv_observer 
+pre_window: export RUN_TYPE=simulation; export UAV_TYPE=x500; export WORLD_NAME=simulation; export ODOMETRY_TYPE=gps; export SENSORS="garmin_down"
+windows:
+  - uv_observer:
+      layout: even-vertical
+      panes:
+        - waitForCompile; #gz world --pause=0; sleep 12;  export UAV_NAME=uav1; waitForControl; roslaunch uvdar_core sim_three_sided.launch
+        - waitForCompile; #gz world --pause=0; sleep 12;  export UAV_NAME=uav3; waitForControl; roslaunch uvdar_core sim_three_sided.launch
+        # - waitForCompile; gz world --pause=0; sleep 6;  export UAV_NAME=uav1; waitForControl; roslaunch uvdar_core multi_frequency_test.launch
+  - kalman_filter:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav29; waitForControl; roslaunch uvdar_core uvdar_kalman.launch output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav30; waitForControl; roslaunch uvdar_core uvdar_kalman.launch output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav38; waitForControl; roslaunch uvdar_core uvdar_kalman.launch output_frame:=$UAV_NAME/stable_origin
+  - object_tracker_uav29:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav29; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav30 output_id:=3
+        - export UAV_NAME=uav29; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav38 output_id:=4
+  - object_tracker_uav30:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav30; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav29 output_id:=2
+        - export UAV_NAME=uav30; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav38 output_id:=4
+  - object_tracker_uav38:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav38; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav30 output_id:=3
+        - export UAV_NAME=uav38; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav29 output_id:=2
+        #- export UAV_NAME=uav29; waitForControl; roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav30
+        #- export UAV_NAME=uav30; waitForControl; roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav29
+        #- export UAV_NAME=uav38; waitForControl; roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav30
+  - object_tracker_multiple:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav29; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav30 output_id:=3
+        - export UAV_NAME=uav30; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav29 output_id:=2
+        - export UAV_NAME=uav38; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav30 output_id:=3
+        - export UAV_NAME=uav29; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav38 output_id:=4
+        - export UAV_NAME=uav38; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav29 output_id:=2
+        - export UAV_NAME=uav30; waitForControl; history -s roslaunch object_tracker tracker_lnn.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin target_uav:=uav38 output_id:=4
+  - object_tracker_simple:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav29; waitForControl; history -s roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav30; waitForControl; history -s roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav38; waitForControl; history -s roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+  - uwb_range_uwb_lnn:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav29; waitForControl; roslaunch uwb_range_fake uwb_lnn.launch output_id:=3 target_uav:=uav30 output_frame:=$UAV_NAME/fcu
+        - export UAV_NAME=uav30; waitForControl; roslaunch uwb_range_fake uwb_lnn.launch output_id:=2 target_uav:=uav29 output_frame:=$UAV_NAME/fcu
+        - export UAV_NAME=uav38; waitForControl; roslaunch uwb_range_fake uwb_lnn.launch output_id:=3 target_uav:=uav30 output_frame:=$UAV_NAME/fcu
+        - export UAV_NAME=uav30; waitForControl; roslaunch uwb_range_fake uwb_lnn.launch output_id:=4 target_uav:=uav38 output_frame:=$UAV_NAME/fcu
+        - export UAV_NAME=uav29; waitForControl; roslaunch uwb_range_fake uwb_lnn.launch output_id:=4 target_uav:=uav38 output_frame:=$UAV_NAME/fcu
+        - export UAV_NAME=uav38; waitForControl; roslaunch uwb_range_fake uwb_lnn.launch output_id:=2 target_uav:=uav29 output_frame:=$UAV_NAME/fcu
+  - goto:
+      layout: even-vertical
+      panes:
+        - 'history -s rosservice call /uav29/control_manager/goto \"goal: \[5.0, -8.0, 5.0, 1.57\]\"'
+        - 'history -s rosservice call /uav30/control_manager/goto \"goal: \[10.0, 0.0, 5.0, 1.57\]\"'
+        - 'history -s rosservice call /uav38/control_manager/goto \"goal: \[15.0, -8.0, 5.0, 1.57\]\"'
+
+        - 'history -s rosservice call /uav7/control_manager/goto \"goal: \[5.0, -8.0, 5.0, 1.57\]\"'
+        - 'history -s rosservice call /uav7/control_manager/goto \"goal: \[10.0, 0.0, 5.0, 1.57\]\"'
+        - 'history -s rosservice call /uav7/control_manager/goto \"goal: \[15.0, -8.0, 5.0, 1.57\]\"'
+  - object_tracker_filtered_poses_29:
+        layout: even-horizontal
+        synchronize: after
+        panes:
+          - 'history -s rostopic echo /uav29/object_tracker_uav30/filtered_poses'
+          - 'history -s rostopic echo /uav29/object_tracker_uav38/filtered_poses'
+  - uvdar_measured_poses_29:
+        layout: even-horizontal
+        synchronize: after
+        panes:
+          - 'history -s rostopic echo /uav29/uvdar/measuredPosesL'
+          - 'history -s rostopic echo /uav29/uvdar/measuredPosesR'
+  - object_tracker_filtered_poses_30:
+        layout: even-horizontal
+        synchronize: after
+        panes:
+          - 'history -s rostopic echo /uav30/object_tracker_uav29/filtered_poses'
+          - 'history -s rostopic echo /uav30/object_tracker_uav38/filtered_poses'
+  - uwb_range:
+        layout: even-horizontal
+        synchronize: after
+        panes:
+          - 'history -s rostopic echo /uav29/uwb_range_uav30/range'
+          - 'history -s rostopic echo /uav30/uwb_range_uav29/range'
+          - 'history -s rostopic echo /uav29/uwb_range_uav38/range'
+          - 'history -s rostopic echo /uav38/uwb_range_uav29/range'
+  - object_tracker_simple_echo:
+      layout: tilted #even-vertical
+      panes:
+        - export UAV_NAME=uav29; waitForControl; history -s rostopic echo $UAV_NAME/object_tracker/filtered_poses
+        - export UAV_NAME=uav30; waitForControl; history -s rostopic echo $UAV_NAME/object_tracker/filtered_poses
+        - export UAV_NAME=uav38; waitForControl; history -s rostopic echo $UAV_NAME/object_tracker/filtered_poses
+  
+  

@@ -1,0 +1,16 @@
+name: simulation
+root: ./
+startup_window: uv_observer 
+windows:
+  - roscore:
+      layout: even-vertical
+      panes:
+        - roscore
+  - settime:
+      layout: even-vertical
+      panes:
+        - waitForRos; rosparam set use_sim_time true
+  - object_tracker:
+      layout: even-vertical
+      panes:
+        - export UAV_NAME=uav39; waitForRos; roslaunch object_tracker tracker.launch kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
