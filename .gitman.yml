@@ -13,7 +13,7 @@ sources:
       - git submodule update --init --recursive
   - repo: git@github.com:ctu-mrs/uvdar_core.git
     name: uvdar_core
-    rev: b6105bd14e197e9cb025786fb80f46cf65bb837d
+    rev: d0be86d161e1da10afbc291de0759bbd6bfa82cf
     type: git
     params:
     sparse_paths:
@@ -146,7 +146,7 @@ sources:
 sources_locked:
   - repo: git@github.com:ctu-mrs/uvdar_core.git
     name: uvdar_core
-    rev: f937679ea2a9b77eacf37a973a1dd8f51d56041d
+    rev: d0be86d161e1da10afbc291de0759bbd6bfa82cf
     type: git
     params:
     sparse_paths:
