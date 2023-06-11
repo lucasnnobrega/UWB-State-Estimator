@@ -12,9 +12,9 @@ windows:
   - object_tracker_simple:
       layout: tilted #even-vertical
       panes:
-        - export UAV_NAME=uav29; waitForControl; history -s roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
-        - export UAV_NAME=uav30; waitForControl; history -s roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
-        - export UAV_NAME=uav38; waitForControl; history -s roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav29; waitForControl; sleep 10; roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav30; waitForControl; sleep 10; roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
+        - export UAV_NAME=uav38; waitForControl; sleep 10; roslaunch object_tracker tracker_multiple_UWB.launch distance_frame:=$UAV_NAME/fcu kalman_frame:=$UAV_NAME/stable_origin output_frame:=$UAV_NAME/stable_origin
   - uwb_range_uwb_lnn:
       layout: tilted #even-vertical
       panes:

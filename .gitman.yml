@@ -245,7 +245,7 @@ sources_locked:
       - git submodule update --init --recursive
   - repo: git@github.com:horynjir007/mrse.git
     name: mrse
-    rev: ef7c01edbcc428c5451324e4fda6403f274bd779
+    rev: ebe866ba1921a2d094ccc976a0bf048f01c257fb
     type: git
     params:
     sparse_paths:
