@@ -65,6 +65,9 @@ https://math.stackexchange.com/questions/256100/how-can-i-find-the-points-at-whi
 ## Command for keyboard share
 x2x -to :0 -east
 
+## command to add a key
+eval "$(ssh-agent -s)"
+
 ## Command to commit on megabedna
 ssh-add /home/mrs/.ssh/lucasnn
 
@@ -88,3 +91,13 @@ xdg-open $file_name
 
 ## kill object tracker program if the code is not running
 pkill -f uvdar_uwb_state_estimator_workspace
+
+
+
+
+
+
+
+
+
+
