@@ -1,0 +1,6 @@
+x2x -to :0 -east
+x2x -to :0 -east
+\n# Command for keyboard share\nx2x -to :0 -east
+\n# Command for keyboard share\nx2x -to :0 -east
+# Command for keyboard share
+x2x -to :0 -east
